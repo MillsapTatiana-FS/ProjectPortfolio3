@@ -7,5 +7,6 @@
 Week 1 Requirements:
 - Overview: This month will be about the creation of a music search app. I will integrate this with Spotify REST Web API and will be able to login, search and display results.
 - Prerequisites: NodeJS, Express, JS and React
-- Getting Started: To get up and running please use NPM Start
+- Getting Started: To get up and running please use NodeJS and run 
+  npm run watch
 - Links: Using localhost:3000
