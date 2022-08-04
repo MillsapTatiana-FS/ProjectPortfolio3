@@ -2,11 +2,20 @@
 
 ## Welcome!
 
-### Here is where you can keep track of what I have been working on week to week during this month. 
+This project will use Spotify Web API to integrate into a website that will allow a user to login, search and pull data which will be displayed. 
 
-Week 1 Requirements:
-- Overview: This month will be about the creation of a music search app. I will integrate this with Spotify REST Web API and will be able to login, search and display results.
-- Prerequisites: NodeJS, Express, JS and React
-- Getting Started: To get up and running please use NodeJS and run 
-  npm run watch
-- Links: Using localhost:3000
+### Prerequisites
+
+- NodeJS
+- npm
+- Chrome or Safari 
+
+### How to get started
+
+Make sure a .env file was created and put the environment variables inside. 
+
+### Links
+The necessary links that will be used (to be updated as project develops)
+- http://localhost:3000 - The main location of the user interface
+- https://accounts.spotify.com/authorize - Spotify authorization endpoint for login 
+- https://api.spotify.com/v1/search - Required for search query.
