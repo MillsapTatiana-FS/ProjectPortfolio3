@@ -1,7 +1,11 @@
 const express = require('express');
+const cors = require('cors');
+const bodyParser = require('body-parser');
 const SpotifyWebApi = require('spotify-web-api-node');
 
 const app = express();
+app.use(cors());
+app.use(bodyParser.json());
 
 app.post('/login', (req, res) => {
   const { code } = req.body.code;
@@ -16,14 +20,10 @@ app.post('/login', (req, res) => {
     refresh_token: data.body['refresh_token'],
     expires_in: data.body['expires_in']
     })
-  }).catch(()=> {
+  }).catch(err => {
+    
     res.sendStatus(400)
   })
 })
-// var http = require("http");   
 
-// http.createServer(function (req, res) {
-//   res.writeHead(200, {"Content-Type": "text/plain"});
-//   res.write("Hello World");
-//   res.end();
-// }).listen(8888);
+app.listen(3001)
