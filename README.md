@@ -13,6 +13,7 @@ This project will use Spotify Web API to integrate into a website that will allo
 ### How to get started
 
 Make sure a .env file was created and put the environment variables inside. 
+Use npm start
 
 ### Links
 The necessary links that will be used (to be updated as project develops)
