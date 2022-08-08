@@ -1,4 +1,3 @@
-import './App.css';
 import Login from './Login';
 import Dashboard from './Dashboard';
 
