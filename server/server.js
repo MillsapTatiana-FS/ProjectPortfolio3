@@ -3,9 +3,11 @@ const cors = require('cors');
 const bodyParser = require('body-parser');
 const SpotifyWebApi = require('spotify-web-api-node');
 
-const app = express();
-app.use(cors());
-app.use(bodyParser.json());
+const app = express()
+app.use(cors())
+app.use(bodyParser.json())
+
+console.log("Hello")
 
 app.post("/refresh", (req, res) => {
   const refreshToken = req.body.refreshToken
@@ -21,7 +23,7 @@ app.post("/refresh", (req, res) => {
   .then((data) => {
     res.json({
       accessToken: data.body.accessToken,
-      expiresIn: data.body.expiresIn
+      expiresIn: data.body.expiresIn,
     })
     
   })
