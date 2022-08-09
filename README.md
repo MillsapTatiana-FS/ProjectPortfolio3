@@ -8,11 +8,13 @@ This project will use Spotify Web API to integrate into a website that will allo
 
 - NodeJS
 - npm
-- Chrome or Safari 
+- Chrome or Safari
+- Express
 
 ### How to get started
 
 Make sure a .env file was created and put the environment variables inside. 
+Please make sure CLIENT_ID and CLIENT_SECRET are secured away.
 Use npm start
 
 ### Links
