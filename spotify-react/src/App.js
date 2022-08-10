@@ -1,13 +1,12 @@
+import Login from "./Login"
+import Dashboard from "./Dashboard"
+
+const code = new URLSearchParams(window.location.search).get('code')
 
 function App() {
 
-  return (
-    <div className="App">
-      <header className="App-header">
-        <h1>Spotify React</h1>
-      </header>
-    </div>
-  );
+  return code ? <Dashboard code={code} /> : <Login />
+  
 }
 
-export default App;
+export default App
