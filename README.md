@@ -11,6 +11,7 @@ This project will use Spotify Web API to integrate into a website that will allo
 - Chrome or Safari
 - Express
 - React
+- MongoDB
 
 ### How to get started
 
