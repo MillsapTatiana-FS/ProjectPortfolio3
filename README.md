@@ -1,6 +1,6 @@
 # Project and Portfolio 3
 
-## Welcome!
+## Project Overview
 
 This project will use Spotify Web API to integrate into a website that will allow a user to login, search and pull music data which will be displayed. 
 
