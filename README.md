@@ -2,7 +2,7 @@
 
 ## Welcome!
 
-This project will use Spotify Web API to integrate into a website that will allow a user to login, search and pull data which will be displayed. 
+This project will use Spotify Web API to integrate into a website that will allow a user to login, search and pull music data which will be displayed. 
 
 ### Prerequisites
 
@@ -10,11 +10,12 @@ This project will use Spotify Web API to integrate into a website that will allo
 - npm
 - Chrome or Safari
 - Express
+- React
 
 ### How to get started
 
 Make sure a .env file was created and put the environment variables inside. 
-Please make sure CLIENT_ID and CLIENT_SECRET are secured away.
+Please make sure CLIENT_ID and CLIENT_SECRET are secured.
 Use npm start
 
 ### Links
