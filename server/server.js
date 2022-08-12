@@ -15,7 +15,7 @@ app.get('/callback', (req, res) => {
     console.log(req.query)
 })
 
-app.post("/refresh", (req, res) => {
+app.post('/refresh', (req, res) => {
     const refreshToken = req.body.refreshToken
     const spotifyApi = new SpotifyWebApi({
         clientId: process.env.CLIENT_ID,
@@ -32,12 +32,11 @@ app.post("/refresh", (req, res) => {
             })
         })
         .catch(err => {
-            console.log(err)
             res.sendStatus(400)
         })
     })
 
-app.get("/login", (req, res) => {
+app.get('/login', (req, res) => {
 
     const code  = req.body.code
     const spotifyApi = new SpotifyWebApi({
