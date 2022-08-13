@@ -8,10 +8,10 @@ This project will use Spotify Web API to integrate into a website that will allo
 
 - NodeJS
 - npm
-- Chrome or Safari
+- Chrome 
 - Express
 - React
-- MongoDB
+- Spotify Web Api
 
 ### How to get started
 
