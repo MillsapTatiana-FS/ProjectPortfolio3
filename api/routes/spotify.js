@@ -1,9 +1,9 @@
 const express = require("express");
 const router = express.Router();
 require("dotenv").config();
-const axios = require("axios");
+//const axios = require("axios");
 const querystring = require("querystring");
-const URLSearchParams = require("url").URLSearchParams;
+//const URLSearchParams = require("url").URLSearchParams;
 const SpotifyWebApi = require("spotify-web-api-node");
 const SpotifyTokn = require("../models/spotifytokn");
 

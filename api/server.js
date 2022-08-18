@@ -11,6 +11,20 @@ app.use(bodyParser.json());
 
 const PORT = process.env.PORT || 3001;
 
+const DATABASE_URL = process.env.MONGODB_URI;
+
+mongoose.connect(DATABASE_URL, { useNewUrlParser: true });
+const db = mongoose.connection;
+db.on('error', error => console.log(error))
+db.once('open', () => console.log('Connected to Database'))
+
+const spotify = require("./routes/spotify")
+app.use('/spotify/v1', spotify)
+
+app.listen(PORT, () => {
+    console.log(`Server listening on port ${PORT}`)
+})
+
 // app.get('/callback', (req, res) => {
 //     console.log(req.query)
 // })
@@ -58,6 +72,3 @@ const PORT = process.env.PORT || 3001;
 //     })
 // })
 
-app.listen(PORT, () => {
-console.log(`Server running on ${PORT}.`) 
-})
