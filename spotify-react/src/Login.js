@@ -1,11 +1,56 @@
-import React from 'react'
+import React from 'react';
 
-const AUTH_URL = 'https://accounts.spotify.com/authorize?client_id=d6f9ca3d9254465c9820c56c43246f1e&response_type=code&redirect_uri=http://localhost:3000/callback'
+// SPOTIFY API AUTH URL
+const client_id = process.env.CLIENT_ID
+const redirect_uri = 'http://localhost:3000/callback'
+const AUTH_URL = `https://accounts.spotify.com/authorize?client_id=${client_id}&response_type=code&redirect_uri=${redirect_uri}&scope=streaming%20user-read-email%20user-read-private%20user-library-read%20user-library-modify%20user-read-playback-state%20user-modify-playback-state`
 
-export default function Login() {
-  return (
-    <div>
-        <a href={AUTH_URL}>Login with Shopify</a>
-    </div>
-  )
+function Login() {
+    return (
+        <div style={styles.loginPage}>
+                <img 
+            src="https://storage.googleapis.com/pr-newsroom-wp/1/2018/11/Spotify_Logo_RGB_White.png" 
+            alt="logo-spotify"
+            className="logo" 
+            />
+                <a href={AUTH_URL}>
+                    <div className="login-btn">Login with Spotify</div>
+                </a>
+        </div>
+    );
 }
+
+
+export default Login;
+
+const styles = {
+    loginPage: {
+        backgroundColor: "#000000",
+        height: '100vh',
+        width: '100vw',
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+        overflow: 'hidden',
+        flexDirection: 'column',
+      },
+      
+      logo: {
+        width: '30%',
+      },
+      
+      loginBtn: {
+        width: '200px',
+        padding: '15px 0px',
+        textAlign: 'center',
+        backgroundColor: '#bd09c0',
+        borderRadius: '50px',
+        color: '#1f1f1f',
+        fontWeight: '600',
+        marginTop: '20%',
+      },
+      
+      a: {
+        textDecoration: 'none',
+      }
+    }
