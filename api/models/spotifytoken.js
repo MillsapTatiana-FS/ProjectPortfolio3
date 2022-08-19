@@ -1,6 +1,6 @@
 const mongoose = require("mongoose");
 
-const spotifytoknSchema = new mongoose.Schema({
+const spotifyTokenSchema = new mongoose.Schema({
     access_token: {
         type: String,
         required: true,
@@ -13,7 +13,10 @@ const spotifytoknSchema = new mongoose.Schema({
         type: Number,
         required: true,
     },
-
+    token_type: {
+        type: String,
+        required: true,
+    },
 })
 
-module.exports = mongoose.model('SpotifyTokn', spotifytoknSchema)
+module.exports = mongoose.model('SpotifyToken', spotifyTokenSchema)

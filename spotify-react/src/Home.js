@@ -5,7 +5,7 @@ function Dashboard({code}) {
     const accessToken = useAuth(code)
     return (
         <div>
-            <p>Access Granted</p>
+            <p>Let's Jam!</p>
         </div>
     );
 }

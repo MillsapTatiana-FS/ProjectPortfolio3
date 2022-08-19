@@ -1,74 +1,39 @@
-const express = require("express") 
-const SpotifyWebApi = require('spotify-web-api-node');
-require("dotenv" ).config("../.env");
-const mongoose = require ("mongoose") ;
-const cors = require("cors");
-const bodyParser = require("body-parser");
+const express = require('express');
+require('dotenv').config();
+const dotenv = require('dotenv');
+const mongoose = require('mongoose');
+const path = require('path');
+const cors = require('cors');
+const bodyParser = require('body-parser');
 
-const app = express(); 
-app.use(cors());
-app.use(bodyParser.json());
+const app = express();
+app.use(cors())
+app.use(bodyParser.json())
 
-const PORT = process.env.PORT || 3001;
+const PORT = 3001;
+const loginRouter = require('./routes/spotify');
 
-const DATABASE_URL = process.env.MONGODB_URI;
-
-mongoose.connect(DATABASE_URL, { useNewUrlParser: true });
 const db = mongoose.connection;
-db.on('error', error => console.log(error))
-db.once('open', () => console.log('Connected to Database'))
 
-const spotify = require("./routes/spotify")
-app.use('/spotify/v1', spotify)
+mongoose.connect('mongodb://localhost:27017/spotify', { useNewURLParser: true });
+db.on('error', error => console.error(error))
+db.once('open', () => console.log('Database connected'))
 
-app.listen(PORT, () => {
-    console.log(`Server listening on port ${PORT}`)
+app.use((req,res,next) => {
+    res.header("Access-Control-Allow-Origin","*");
+    res.header("Access-Control-Allow-Headers","Origin, X-Requested-With,Content-Type,Accept, Authorization");
+
+    if(req.method === "OPTIONS"){
+        res.header("Access-Control-Allow-Methods", "POST,PUT,GET,PATCH,DELETE");
+    };
+    next();
 })
 
-// app.get('/callback', (req, res) => {
-//     console.log(req.query)
-// })
+app.use(express.json())
+app.use('/', loginRouter);
 
-// app.post('/refresh', (req, res) => {
-//     const refreshToken = req.body.refreshToken
-//     const spotifyApi = new SpotifyWebApi({
-//         clientId: process.env.CLIENT_ID,
-//         clientSecret: process.env.CLIENT_SECRET,
-//         redirectUri: process.env.REDIRECT_URI,
-//         refreshToken,
-//     })
-//     spotifyApi
-//         .refreshAccessToken()
-//         .then(data => {
-//             res.json({
-//                 accessToken: data.body.access_token,
-//                 expiresIn: data.body.expires_in,
-//             })
-//         })
-//         .catch(err => {
-//             res.sendStatus(400)
-//         })
-//     })
 
-// app.get('/login', (req, res) => {
 
-//     const code  = req.body.code
-//     const spotifyApi = new SpotifyWebApi({
-//         redirectUri: "http://localhost:3000/callback",
-//         clientId: process.env.CLIENT_ID,
-//         clientSecret: process.env.CLIENT_SECRET,
-//     })
-//     spotifyApi
-//     .authorizationCodeGrant(code)
-//     .then(data => {
-//         res.json({
-//             accessToken: data.body.access_token,
-//             refreshToken: data.body.refresh_token,
-//             expiresIn: data.body.expires_in,
-//         })
-//     })
-//     .catch(() => {
-//         res.sendStatus(400)
-//     })
-// })
-
+app.listen(PORT, () => {
+    console.log(`Server running on ${PORT}`)
+})
