@@ -1,39 +1,32 @@
 const express = require('express');
 require('dotenv').config();
-const dotenv = require('dotenv');
+const bodyParser = require("body-parser")
 const mongoose = require('mongoose');
-const path = require('path');
-const cors = require('cors');
-const bodyParser = require('body-parser');
+const path= require('path');
+const cors= require('cors');
 
 const app = express();
-app.use(cors())
+app.use(cors());
 app.use(bodyParser.json())
 
-const PORT = 3001;
-const loginRouter = require('./routes/spotify');
+const PORT = process.env.PORT || 3001;
+const spotifyRouter = require('./routes/spotify')
 
+
+
+mongoose.connect('mongodb://localhost:27017/spotify/', {useNewUrlParser: true})
 const db = mongoose.connection;
-
-mongoose.connect('mongodb://localhost:27017/spotify', { useNewURLParser: true });
-db.on('error', error => console.error(error))
-db.once('open', () => console.log('Database connected'))
-
-app.use((req,res,next) => {
-    res.header("Access-Control-Allow-Origin","*");
-    res.header("Access-Control-Allow-Headers","Origin, X-Requested-With,Content-Type,Accept, Authorization");
-
-    if(req.method === "OPTIONS"){
-        res.header("Access-Control-Allow-Methods", "POST,PUT,GET,PATCH,DELETE");
-    };
-    next();
-})
+db.on('error', error => console.log(error))
+db.once('open', ()=> console.log("Database Connection Established"))
 
 app.use(express.json())
-app.use('/', loginRouter);
+app.use('/spotify', spotifyRouter)
 
+//Get external API data
+app.get('/*', (req, res) => {
+    res.sendFile(path.join(__dirname, '../reactjs/build', 'index.html'));
+})
 
-
-app.listen(PORT, () => {
+app.listen(PORT, ()=> {
     console.log(`Server running on ${PORT}`)
 })

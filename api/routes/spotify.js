@@ -1,43 +1,78 @@
 const express = require('express');
-const dotenv = require('dotenv');
-const app = express();
-require('dotenv').config();
 const router = express.Router();
-const SpotifyToken = require('../models/spotifytoken');
+require('dotenv').config();
+const {CLIENT_ID, CLIENT_SECRET} = process.env;
+const querystring = require('querystring');
+const randomstring = require('randomstring');
+const URLSearchParams = require('urlsearchparams');
 const SpotifyWebApi = require('spotify-web-api-node');
+const SpotifyToken = require('../models/spotifytoken')
+const jwt = require('jsonwebtoken');
+const checkAuth = require('../jwt/checkAuth');
 
-app.post('/auth', (req, res) => {
-    const code = req.body.code
-    const spotifyApi = new SpotifyWebApi({
-        redirectUri: "http://localhost:3000/callback",
-        clientId: process.env.CLIENT_ID,
-        clientSecret: process.env.CLIENT_SECRET
-    })
-    /
-    spotifyApi.authorizationCodeGrant(code).then(data => {
-        const spotifyToken = new SpotifyToken({
-            access_Token: data.body.access_token,
-            refresh_Token: data.body.refresh_token,
-            expires_in: data.body.expires_in
-        })
 
-        try {
-            const newSpotifyToken = spotifyToken.save()
-            res.status(201).json(newSpotifyToken);
-        } catch (error) {
-            res.status(400).json({ message: error.message })
-        }
-    }).catch((err) => {
-        console.log(err)
-        res.sendStatus(400)
-    })
+
+router.get('/token', (req,res)=>{
+
 })
 
-app.get('/login', (req, res) => {
+// API Login
+router.get('/login', (req,res) =>{
+    const state = randomstring.generate(16)
+    const scope = 'user-read-private'
+
+    res.redirect('https://accounts.spotify.com/authorize?' +
+    querystring.stringify({
+      response_type: 'code',
+      client_id: CLIENT_ID,
+      scope: scope,
+      redirect_uri: 'http://localhost:3000/callback',
+      state: state 
+    }));
+    })
+
+router.get('/checktoken', (req,res)=>{
     
 })
 
-router.get('/token', (req, res) => {
+    
+    
+//API Authenticate
+router.post('/auth', function (req, res) {
+    const code = req.body.code
+    const spotifyApi = new SpotifyWebApi({
+        redirectUri:'http://localhost:3000/callback',
+        clientId: CLIENT_ID,
+        clientSecret: CLIENT_SECRET
+    })
+
+    spotifyApi
+        .authorizationCodeGrant(code)
+        .then(data=>{
+
+            const token = new SpotifyToken({
+            access_token:data.body.access_token,
+            refresh_token:data.body.refresh_token,
+            expires_in: data.body.expires_in
+            })
+            try{
+                const newToken = token.save();
+                res.status(201).json(newToken)
+            } catch(error) {
+                res.status(400).json({ message: error.message })
+            }
+        })
+        .catch(err =>{
+            console.log(err)
+            res.sendStatus(400)
+        })  
+
+    
+
+    
+  });   
+
+router.get('/token', (req,res)=>{
     res.send(req.query.authorization_code)
 })
 
