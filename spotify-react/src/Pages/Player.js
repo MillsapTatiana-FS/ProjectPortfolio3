@@ -1,6 +1,6 @@
 import React, { useEffect, useState} from 'react';
 import { useLocation } from 'react-router-dom';
-import apiClient from '../../spotify';
+import apiClient from '../apiClient';
 
 export default function Player() {
   const location = useLocation();

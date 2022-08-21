@@ -1,7 +1,5 @@
 import React, {useState, useEffect} from "react";
-
-
-
+import apiClient from '../apiClient';
 
 export default function Login() {
   return (
@@ -28,10 +26,10 @@ const styles = {
         flexDirection: 'column',
       },
       
-//       logo: {
-//         width: '900px',
-//         height: '40vh',
-//       },
+      logo: {
+        width: '900px',
+        height: '40vh',
+      },
       
       loginBtn: {
         width: '400px',
@@ -46,7 +44,7 @@ const styles = {
         marginTop: '20%',
       },
       
-//       a: {
-//         textDecoration: 'none',
-//       }
+      a: {
+         textDecoration: 'none',
+      }
     }

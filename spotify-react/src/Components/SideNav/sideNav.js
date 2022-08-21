@@ -4,8 +4,8 @@ import { FaGripfire, FaPlay } from 'react-icons/fa';
 import { FaSignOutAlt } from 'react-icons/fa';
 import { IoLibrary } from 'react-icons/io5';
 import { MdSpaceDashboard } from 'react-icons/md';
-import apiClient from '../../spotify';
-import SideNavButton from './SideNavButton';
+import apiClient from '../../apiClient';
+import SideNavButton from './sideNavButton';
 
 export default function SideNav() {
   const [image, setImage] = useState("https://tinyurl.com/yc6fmh8c");
@@ -34,21 +34,21 @@ export default function SideNav() {
   );
 }
 
-const styles = {
-    .sidebar-container{
-        width: 100px;
-        height: 100%;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: space-between;
-      }
+// const styles = {
+//     .sidebar-container{
+//         width: 100px;
+//         height: 100%;
+//         display: flex;
+//         flex-direction: column;
+//         align-items: center;
+//         justify-content: space-between;
+//       }
       
-      .profile-img{
-        width: 80px;
-        height: 80px;
-        border-radius: 20px;
-        margin-top: 20px;
-        margin-left: 5px;
-      }
-}
+//       .profile-img{
+//         width: 80px;
+//         height: 80px;
+//         border-radius: 20px;
+//         margin-top: 20px;
+//         margin-left: 5px;
+//       }
+// }

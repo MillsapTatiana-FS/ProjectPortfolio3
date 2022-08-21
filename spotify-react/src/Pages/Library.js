@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
-import apiClient from '../../spotify';
 import { useNavigate } from 'react-router-dom';
 import { IconContext } from 'react-icons';
 import { AiFillPlayCircle } from 'react-icons/ai';
+import apiClient from '../apiClient';
 
 export default function Library() {
   const [playlists, setPlaylists] = useState(null);
@@ -21,9 +21,9 @@ export default function Library() {
 
   return (
     <div className="screen-container">
-      <div className="library-body">
+      <div styles={styles.libraryBody}>
         {playlists?.map((playlist) => (
-          <div className="playlist-card"
+          <div styles={styles.playlistCard}
             key={playlist.id}
             onClick={() => playPlaylist(playlist.id)}
           >
@@ -67,22 +67,20 @@ const styles = {
         padding: '1%',
         marginBottom: '2%',
         background:' rgb(1, 2, 3)',
-        background: 
-        'linear-gradient(
-            '75deg':
-         ' rgb(250, 250, 249) 0%':
-         ' rgba(245, 215, 236, 0) 100%'
-        )',
+        // background:'linear-gradient('75 deg', 'rgb(250, 250, 249) 0%', 'rgba(245, 215, 236, 0) 100%')',
         transition: 'all 0.2s ease',
         cursor: 'pointer',
       },
       
-      playlistCard:hover : {
-        transform: scale(1.02);
-      },
-      
-      playlistCard:hover, playlistFade: {
+      playlistCard: { 
+        '&: hover' : {
+        transform: 'scale(1.02)',
         opacity: '0',
+        },
+      
+        '&: playlistFade' : {
+        opacity: '0',
+        },
       },
       
       playlistImage: {
@@ -99,7 +97,7 @@ const styles = {
         display: 'webkitBox',
         overflow: 'hidden',
         textOverflow: 'ellipsis',
-        webKitLineClamp: '2',
+        WebKitLineClamp: '2',
         lineClamp: '2',
         webkitBoxOrient: "vertical",
       },
@@ -119,11 +117,7 @@ const styles = {
         width: "84%",
         height: "34%",
         borderRadius: "20px",
-        background: linear-gradient(
-          180deg,
-          rgba(175, 142, 192, 0.345) 10%,
-          rgb(150, 60, 150) 100%
-        ),
+        // background: 'linear-gradient('180deg', 'rgba(175, 142, 192, 0.345) 10%', 'rgb(150, 60, 150) 100%')',
         display: "flex",
         alignItems: "flex-end",
         justifyContent: "flex-end",

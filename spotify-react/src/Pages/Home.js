@@ -1,7 +1,7 @@
 import React, {useState, useEffect} from "react";
 import axios from "axios"
-import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
-import SideNav from './Components/SideNav/sideNav';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import SideNav from '../Components/SideNav/sideNav';
 import Favorites from './Favorites';
 import Feed from './Feed';
 import Library from './Library';
@@ -35,7 +35,7 @@ function Home({code}) {
 
   
   return (
-    <Router>
+    <BrowserRouter>
         <div style={styles.mainBody}>
           <SideNav />
             <Routes>
@@ -46,7 +46,7 @@ function Home({code}) {
               <Route path="/favorites" element={<Favorites />} />
             </Routes>
         </div>
-        </Router>
+    </BrowserRouter>
   );
 }
 
@@ -56,7 +56,7 @@ const styles = {
   mainBody: {
     height: "100vh",
     width: "100vw",
-    backgroundColor: "cornsilk",
+    backgroundColor: "#fdfdf9",
     borderRadius: "30px",
     display: "flex",
   },
