@@ -1,6 +1,6 @@
 import {BrowserRouter as Router, Route, Routes} from 'react-router-dom';
-import Home from './Home';
-import Login from './Login'
+import Home from './Pages/Home';
+import Login from './Pages/Login';
 const code = new URLSearchParams(window.location.search).get('code')
 
 function App(){

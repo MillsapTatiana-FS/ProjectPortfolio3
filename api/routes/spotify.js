@@ -24,6 +24,7 @@ router.get("/login", (req,res, next) =>{
       scope: scope,
       response_type: 'code',
       state: state,
+      show_dialog: true
     }));
     })
     
