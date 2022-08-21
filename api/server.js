@@ -7,26 +7,37 @@ const cors= require('cors');
 
 const app = express();
 app.use(cors());
+app.use(express.json())
 app.use(bodyParser.json())
+app.use(bodyParser.urlencoded({extended: true}));
 
-const PORT = process.env.PORT || 3001;
-const spotifyRouter = require('./routes/spotify')
+const PORT = process.env.PORT || 3000;
+const DATABASE_URL = process.env.DATABASE_URL || 'mongodb://localhost:27017/';
 
-
-
-mongoose.connect('mongodb://localhost:27017/spotify/', {useNewUrlParser: true})
+mongoose.connect(DATABASE_URL, {useNewUrlParser: true})
 const db = mongoose.connection;
 db.on('error', error => console.log(error))
 db.once('open', ()=> console.log("Database Connection Established"))
 
-app.use(express.json())
-app.use('/spotify', spotifyRouter)
+const spotifyRouter = require('./routes/spotify')
+app.use('/spotify/v1', spotifyRouter)
 
 //Get external API data
-app.get('/*', (req, res) => {
-    res.sendFile(path.join(__dirname, '../reactjs/build', 'index.html'));
-})
+app.post('/login', async (req,res) =>{
+    const state = randomstring.generate(16)
+    const scope = 'user-read-private'
 
+    res.redirect('https://accounts.spotify.com/authorize?' +
+    querystring.stringify({
+      response_type: 'code',
+      client_id: CLIENT_ID,
+      scope: scope,
+      redirect_uri: 'http://localhost:3000',
+      state: state 
+    }));
+
+    
+});
 app.listen(PORT, ()=> {
     console.log(`Server running on ${PORT}`)
 })
