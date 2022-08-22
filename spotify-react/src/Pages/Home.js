@@ -8,35 +8,13 @@ import Library from '../Pages/Library/Library';
 import Player from './Player';
 import Trending from './Trending';
 import Login from './Login';
+import { setClientToken } from '../apiClient';
 
-function Home({code}) {
-  // const [info, setInfo] = useState(null)
-  // const [accessToken, setAccessToken] = useState()
-  // const [refreshToken, setRefreshToken] = useState()
-  // const [expiresIn, setExpiresIn] = useState()
-  // const [error, setError] = useState(null)
-
+function Home() {
   
-  let ignore = false;
-  useEffect(()=>{
-    if(!ignore){
-        axios.post('http://localhost:3001/spotify/v1/auth', {
-        code
-        }).then(res =>{
-            console.log(res.data)
-        }).catch(()=>{
-            //window.location ='/'
-        })
-    }
-    return()=>{
-    ignore = true;
-    }
-    
-  }, [code])
   
-  return ![code] ? (
-    <Login />
-    ) : (
+  return (
+  
     <Router>
         <div style={styles.mainBody}>
           <SideNav />

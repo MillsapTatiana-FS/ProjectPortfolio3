@@ -1,11 +1,11 @@
 import Home from './Pages/Home';
 import Login from './Pages/Login';
-const code = new URLSearchParams(window.location.search).get('code')
+const token = new URLSearchParams(window.location.search).get('token')
 
 function App(){
   return (
     <div>
-      {code ? <Home code={code}/> : <Login />}
+       !token <Login /> : <Home />
     </div>
   )
 }

@@ -2,18 +2,20 @@ const express = require('express');
 const router = express.Router();
 require('dotenv').config();
 const randomstring = require('randomstring');
-const SpotifyWebApi = require('spotify-web-api-node');
+//const SpotifyWebApi = require('spotify-web-api-node');
 const SpotifyToken = require('../models/spotifytoken')
 const qs = require('qs');
+const axios = require('axios');
+const request = require('request');
 
 const client_id = process.env.CLIENT_ID;
-const redirectUri = "http://localhost:3000/callback";
+const client_secret = process.env.CLIENT_SECRET;
+const redirectUri = "http://localhost:3001/spotify/v1/callback";
 
-const app = express();
 
 
 // API Login
-app.get("/login", (req,res, next) =>{
+router.get("/login", (req,res) =>{
     const state = randomstring.generate(16)
     const scopes = ["user-read-private","user-library-read", "playlist-read-private","user-read-email", "user-read-currently-playing","streaming","user-modify-playback-state", "user-top-read"];
 
@@ -29,12 +31,13 @@ app.get("/login", (req,res, next) =>{
     })
     
     // API Callback
-    app.get('/callback', function(req, res) {
+    router.get('/callback', async function(req, res) {
 
-        const code = req.query.code || null;
-        const state = req.query.state || null;
+        const code = req.query.code;
+        const state = req.query.state;
+        
       
-        if (state === null) {
+        if (false){
           res.redirect('/#' +
             qs.stringify({
               error: 'state_mismatch'
@@ -48,44 +51,32 @@ app.get("/login", (req,res, next) =>{
               grant_type: 'authorization_code'
             },
             headers: {
-              'Authorization': 'Basic ' + (new Buffer.from(client_id + ':' + client_secret).toString('base64'))
+              'Authorization': 'Basic ' + (new Buffer.from(client_id + ':' + client_secret).toString('base64')),
+              'Content-Type': 'application/x-www-form-urlencoded'
             },
             json: true
           };
+          request.post(authOptions, (error, response, body) => {
+            if (!error && response.statusCode === 200) {
+              const access_token = body.access_token;
+              const refresh_token = body.refresh_token;
+              const expires_in = body.expires_in;
+              const token_type = body.token_type;
+              const scope = body.scope;
+              res.send({
+                'access_token': access_token,
+                'refresh_token': refresh_token,
+                'expires_in': expires_in,
+                'token_type': token_type,
+                'scope': scope
+              });
+            }
+          })
         }
       });
+ 
 
-    //API Authenticate
-app.post('/auth', (req, res) => {
-    const code = req.body.code
-    const spotifyApi = new SpotifyWebApi({
-        redirectUri: "http://localhost:3000/callback",
-        clientId: process.env.CLIENT_ID,
-        clientSecret: process.env.CLIENT_SECRET
-    })
-    spotifyApi
-        .authorizationCodeGrant(code)
-        .then((data) => {
-
-            const token = new SpotifyToken({
-            access_token:data.body.access_token,
-            refresh_token:data.body.refresh_token,
-            expires_in: data.body.expires_in
-            })
-            try{
-                const newToken = token.update();
-                res.status(201).json(newToken)
-            } catch(error) {
-                res.status(400).json({ message: error.message })
-            }
-        })
-        .catch(err =>{
-            console.log(err)
-            res.sendStatus(400)
-        })  
-  });   
-
-  app.get('/refresh_token', function(req, res) {
+  router.get('/refresh_token', function(req, res) {
 
     const refresh_token = req.query.refresh_token;
     const authOptions = {
