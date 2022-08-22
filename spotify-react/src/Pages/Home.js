@@ -1,21 +1,22 @@
 import React, {useState, useEffect} from "react";
 import axios from "axios"
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import SideNav from '../Components/SideNav/sideNav';
 import Favorites from './Favorites';
 import Feed from './Feed';
-import Library from './Library';
+import Library from '../Pages/Library/Library';
 import Player from './Player';
 import Trending from './Trending';
+import Login from './Login';
 
 function Home({code}) {
-  const [info, setInfo] = useState(null)
-  const [accessToken, setAccessToken] = useState()
-  const [refreshToken, setRefreshToken] = useState()
-  const [expiresIn, setExpiresIn] = useState()
-  const [error, setError] = useState(null)
+  // const [info, setInfo] = useState(null)
+  // const [accessToken, setAccessToken] = useState()
+  // const [refreshToken, setRefreshToken] = useState()
+  // const [expiresIn, setExpiresIn] = useState()
+  // const [error, setError] = useState(null)
 
-
+  
   let ignore = false;
   useEffect(()=>{
     if(!ignore){
@@ -24,7 +25,7 @@ function Home({code}) {
         }).then(res =>{
             console.log(res.data)
         }).catch(()=>{
-            window.location ='/'
+            //window.location ='/'
         })
     }
     return()=>{
@@ -32,10 +33,11 @@ function Home({code}) {
     }
     
   }, [code])
-
   
-  return (
-    <BrowserRouter>
+  return ![code] ? (
+    <Login />
+    ) : (
+    <Router>
         <div style={styles.mainBody}>
           <SideNav />
             <Routes>
@@ -46,7 +48,7 @@ function Home({code}) {
               <Route path="/favorites" element={<Favorites />} />
             </Routes>
         </div>
-    </BrowserRouter>
+    </Router>
   );
 }
 
@@ -54,10 +56,10 @@ export default Home;
 
 const styles = {
   mainBody: {
-    height: "100vh",
-    width: "100vw",
-    backgroundColor: "#fdfdf9",
-    borderRadius: "30px",
-    display: "flex",
+    height: '100vh',
+    width: '100vw',
+    backgroundColor: '#f7e2fb',
+    borderRadius: '30px',
+    display: 'flex',
   },
 }

@@ -1,14 +1,14 @@
 import axios from "axios";
 require('dotenv').config();
 
-const CLIENT_ID = process.env.CLIENT_ID;
-const REDIRECT_URI = "http://localhost:3000";
-const AUTH_ENDPOINT = "https://accounts.spotify.com/authorize?";
+const client_id = "d6f9ca3d9254465c9820c56c43246f1e";
+const redirectUri = "http://localhost:3000/callback";
+const authEndpoint = "https://accounts.spotify.com/authorize?";
 const scopes = ["user-read-private","user-library-read", "playlist-read-private","user-read-email", "user-read-currently-playing","streaming","user-modify-playback-state", "user-top-read"];
-const RESPONSE_TYPE = "code";
+const response_type = "code";
 
 
-export const loginEndpoint = `${AUTH_ENDPOINT}client_id=${CLIENT_ID}&redirect_uri=${REDIRECT_URI}&scope=${scopes.join("%20")}&response_type=${RESPONSE_TYPE}&show_dialog=true`;
+export const loginEndpoint = `${authEndpoint}client_id=${client_id}&redirect_uri=${redirectUri}&scope=${scopes.join("%20")}&response_type=${response_type}&show_dialog=true`;
 
 const apiClient = axios.create({
     baseURL: "https://api.spotify.com/v1/",
@@ -16,7 +16,7 @@ const apiClient = axios.create({
 
 export const setClientToken = (token) => {
     apiClient.interceptors.request.use(async function (config) {
-        config.headers.Authorization = `Bearer ${token}`;
+        config.headers.Authorization = `Bearer + ${token}`;
         return config;
     });
 };

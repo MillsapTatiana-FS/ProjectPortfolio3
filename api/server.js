@@ -11,6 +11,9 @@ app.use(express.json())
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({extended: true}));
 
+const client_id = process.env.CLIENT_ID;
+const redirectUri = "http://localhost:3000/callback";
+
 const PORT = process.env.PORT || 3000;
 const DATABASE_URL = process.env.DATABASE_URL || 'mongodb://localhost:27017/';
 
@@ -23,16 +26,16 @@ const spotifyRouter = require('./routes/spotify')
 app.use('/spotify/v1', spotifyRouter)
 
 //Get external API data
-app.post('/login', async (req,res) =>{
+app.get('/login', async (req,res) =>{
     const state = randomstring.generate(16)
     const scope = 'user-read-private'
 
     res.redirect('https://accounts.spotify.com/authorize?' +
     querystring.stringify({
       response_type: 'code',
-      client_id: CLIENT_ID,
+      client_id: client_id,
       scope: scope,
-      redirect_uri: 'http://localhost:3000',
+      redirect_uri: redirectUri,
       state: state 
     }));
 

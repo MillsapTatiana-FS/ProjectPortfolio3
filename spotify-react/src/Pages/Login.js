@@ -1,5 +1,5 @@
-import React, {useState, useEffect} from "react";
-import apiClient from '../apiClient';
+import React from "react";
+import { loginEndpoint } from "../apiClient";
 
 export default function Login() {
   return (
@@ -8,8 +8,8 @@ export default function Login() {
         src="https://storage.googleapis.com/pr-newsroom-wp/1/2018/11/Spotify_Logo_RGB_White.png" 
         alt="logo-spotify"
       />
-      <a style={styles.loginBtn} href="http://localhost:3001/spotify/v1/login">
-        Login With Spotify
+      <a href={loginEndpoint}>
+        <div style={styles.loginBtn}>Login With Spotify</div>
       </a>
     </div>
   )
@@ -28,7 +28,7 @@ const styles = {
       
       logo: {
         width: '900px',
-        height: '40vh',
+        height: '35vh',
       },
       
       loginBtn: {
