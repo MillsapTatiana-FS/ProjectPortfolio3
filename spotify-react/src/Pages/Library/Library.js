@@ -2,17 +2,11 @@ import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { IconContext } from 'react-icons';
 import { AiFillPlayCircle } from 'react-icons/ai';
-import apiClient from '../../apiClient';
 import "./Library.css";
 
 export default function Library() {
   const [playlists, setPlaylists] = useState(null);
 
-  useEffect(() => {
-    apiClient.get("me/playlists").then(function (res) {
-      setPlaylists(res.data.items);
-    });
-  }, []);
 
   const navigate = useNavigate();
 

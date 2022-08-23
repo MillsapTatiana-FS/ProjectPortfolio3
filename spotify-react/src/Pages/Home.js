@@ -8,7 +8,6 @@ import Library from '../Pages/Library/Library';
 import Player from './Player';
 import Trending from './Trending';
 import Login from './Login';
-import { setClientToken } from '../apiClient';
 
 function Home() {
   
