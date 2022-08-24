@@ -1,11 +1,18 @@
+import { useState, useEffect } from 'react';
+import { accessToken } from './spotify';
 import Home from './Pages/Home';
 import Login from './Pages/Login';
-const token = new URLSearchParams(window.location.search).get('token')
 
 function App(){
+  const [token, setToken] = useState(null);
+  
+  useEffect(() => {
+    setToken(accessToken);  
+  }, [])
+  
   return (
     <div>
-       {token ?<Home token={token} /> : <Login />}
+     {!token ? (<Login />) : (<Home />)}
     </div>
   )
 }
