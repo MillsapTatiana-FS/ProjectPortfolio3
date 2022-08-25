@@ -74,9 +74,7 @@ router.get('/callback', (req, res) => {
         })
         //redirect to react
         res.redirect(`http://localhost:3000/?${queryParams}`);
-        //pass along tokens in query params
-
-        
+        //pass along tokens in query params        
       } else {
         res.redirect(`/?qs.stringify({ error: 'query params' })`);
       }
