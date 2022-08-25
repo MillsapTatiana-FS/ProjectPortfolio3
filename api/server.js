@@ -15,7 +15,7 @@ const client_id = process.env.CLIENT_ID;
 const redirectUri = "http://localhost:3001/spotify/v1/callback";
 
 const PORT = process.env.PORT || 3000;
-const DATABASE_URL = process.env.DATABASE_URL || 'mongodb://localhost:27017/';
+const DATABASE_URL = process.env.DATABASE_URL || 'mongodb://localhost:27017/spotify';
 
 mongoose.connect(DATABASE_URL, {useNewUrlParser: true})
 const db = mongoose.connection;

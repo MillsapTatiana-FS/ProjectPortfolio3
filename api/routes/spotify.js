@@ -21,14 +21,13 @@ const spotifyApi = new SpotifyWebApi({
 });
 
 spotifyApi.setAccessToken(process.env.ACCESS_TOKEN);
-console.log(spotifyApi.getAccessToken());
+// console.log(spotifyApi.getAccessToken());
 
 const authorizeURL = spotifyApi.createAuthorizeURL(scopes);
 
 const updateToken = async (data) => {
   return await SpotifyToken.findOneAndReplace({refresh_token: data.refresh_token});
 };
-console.log(authorizeURL)
 
 // const code = SpotifyToken.findOne({refresh_token: String}); 
 // spotifyApi.authorizationCodeGrant(code).then(
@@ -42,13 +41,13 @@ console.log(authorizeURL)
 /* GET home page. */
 
 router.get('/login', (req,res) => {
-  const html = spotifyApi.createAuthorizeURL(scopes)
+  authorizeURL(scopes)
   res.send(html+"&show_dialog=true")  
 })
 
 router.get('/callback', async (req,res) => {
   const { code } = req.query;
-  console.log(code)
+  // console.log(code)
   try {
     const data = spotifyApi.authorizationCodeGrant(code)
     const { access_token, refresh_token } = data.body;
@@ -56,7 +55,7 @@ router.get('/callback', async (req,res) => {
     spotifyApi.setRefreshToken(refresh_token);
     
 
-    res.redirect("https://api.spotify.com/v1/");
+    res.redirect("https://api.spotify.com/v1/me");
   } catch(err) {
     res.redirect('/#/error/invalid token');
   }
@@ -81,7 +80,7 @@ router.get('me/playlists', async (req,res) => {
   } catch (err) {
     res.status(400).send(err)
   }
-
+//get playlist tracks
 });
 
 module.exports = router;
