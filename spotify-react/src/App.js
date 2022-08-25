@@ -5,7 +5,7 @@ const token = new URLSearchParams(window.location.search).get('token')
 function App(){
   return (
     <div>
-       !token <Login /> : <Home />
+      <Login />
     </div>
   )
 }
