@@ -22,6 +22,7 @@ const REDIRECT_URI = "http://localhost:3001/spotify/v1/callback"
 const scope = ['user-read-private user-read-email user-read-playback-state user-modify-playback-state user-read-currently-playing user-read-recently-played user-top-read'];
 
 
+
 // API Login
 router.get('/login', (req,res) => {
   const state = generateRandomString(16);

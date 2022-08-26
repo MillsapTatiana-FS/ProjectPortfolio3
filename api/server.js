@@ -22,9 +22,9 @@ db.once('open', ()=> console.log("Database Connected"))
 const spotifyRouter = require('./routes/spotify')
 app.use('/spotify/v1', spotifyRouter)
 
-app.get("/", (req, res) => {
-  res.json({})
-})
+// app.get("/", (req, res) => {
+//   res.redirect("/spotify/v1/")
+// })
 
 app.listen(PORT, ()=> {
     console.log(`Server running on ${PORT}`)
