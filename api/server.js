@@ -22,9 +22,15 @@ db.once('open', ()=> console.log("Database Connected"))
 const spotifyRouter = require('./routes/spotify')
 app.use('/spotify/v1', spotifyRouter)
 
-// app.get("/", (req, res) => {
-//   res.redirect("/spotify/v1/")
-// })
+
+//look in the react build folder for static build
+app.use(express.static(path.join(__dirname, '../reactjs/build')));
+
+//for any routes not defined by the api, assume it's a direct request to a client-side route 
+
+app.get('/*', (req, res) => {
+    res.sendFile(path.join(__dirname, '../reactjs/build', 'index.html'));
+})
 
 app.listen(PORT, ()=> {
     console.log(`Server running on ${PORT}`)

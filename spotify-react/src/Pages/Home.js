@@ -7,7 +7,7 @@ import Feed from "./Feed";
 import Library from "../Pages/Library/Library";
 import Player from "./Player";
 import Trending from "./Trending";
-import Login from "./Login";
+//import Login from "./Login";
 
 const token = new URLSearchParams(window.location.search).get("token");
 

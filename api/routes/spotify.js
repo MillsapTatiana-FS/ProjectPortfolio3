@@ -22,7 +22,6 @@ const REDIRECT_URI = "http://localhost:3001/spotify/v1/callback"
 const scope = ['user-read-private user-read-email user-read-playback-state user-modify-playback-state user-read-currently-playing user-read-recently-played user-top-read'];
 
 
-
 // API Login
 router.get('/login', (req,res) => {
   const state = generateRandomString(16);
@@ -39,10 +38,9 @@ router.get('/login', (req,res) => {
 });
 
     // API Callback
-router.get('/callback', (req, res) => {
-  const code = req.query.code || null;
-
-  axios({
+router.get('/callback', async (req, res) => {
+//
+  await axios({
     method: 'post',
     url: 'https://accounts.spotify.com/api/token',
     data: qs.stringify({
@@ -68,9 +66,9 @@ router.get('/callback', (req, res) => {
           access_token,
           refresh_token,
           expires_in,
-        })
+        });
         //redirect to react
-        res.redirect(`http://localhost:3000/spotify/v1/${queryParams}`);
+        res.redirect('http://localhost:3001/spotify/v1?${queryParams}');
         //pass along tokens in query params        
       } else {
         res.redirect(`/?qs.stringify({ error: 'query params' })`);

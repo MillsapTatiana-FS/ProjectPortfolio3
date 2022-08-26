@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
+//import { useNavigate } from 'react-router-dom';
 import { IconContext } from 'react-icons';
 import { AiFillPlayCircle } from 'react-icons/ai';
 import "./Library.css";
@@ -8,10 +8,10 @@ export default function Library() {
   const [playlists, setPlaylists] = useState(null);
 
 
-  const navigate = useNavigate();
+  //const navigate = useNavigate();
 
   const playPlaylist = (id) => {
-    navigate("/player", { state: { id: id } });
+    //navigate("/player", { state: { id: id } });
   };
 
   return (
