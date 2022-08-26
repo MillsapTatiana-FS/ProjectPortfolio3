@@ -5,9 +5,10 @@ const SpotifyToken = require('../models/spotifytoken')
 const qs = require('qs');
 const axios = require('axios');
 
-const CLIENT_ID = process.env.CLIENT_ID;
-const CLIENT_SECRET = process.env.CLIENT_SECRET;
-const REDIRECT_URI = process.env.REDIRECT_URI;
+const CLIENT_ID = process.env.REACT_APP_CLIENT_ID;
+const CLIENT_SECRET = process.env.REACT_APP_CLIENT_SECRET;
+const REDIRECT_URI = "http://localhost:3001/spotify/v1/callback"
+
 
  const generateRandomString = length => {
   let text = '';
@@ -51,8 +52,8 @@ router.get('/callback', (req, res) => {
     headers: {
       'content-type': 'application/x-www-form-urlencoded',
       Authorization: `Basic ${Buffer.from(`${CLIENT_ID}:${CLIENT_SECRET}`).toString('base64')}`,
-    },
-  })
+      },
+    })
     .then(response => {
       if (response.status === 200) {
         const newToken = new SpotifyToken ({
@@ -68,7 +69,7 @@ router.get('/callback', (req, res) => {
           expires_in,
         })
         //redirect to react
-        res.redirect(`http://localhost:3000/spotify/v1`);
+        res.redirect(`http://localhost:3000/spotify/v1/${queryParams}`);
         //pass along tokens in query params        
       } else {
         res.redirect(`/?qs.stringify({ error: 'query params' })`);

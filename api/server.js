@@ -11,19 +11,19 @@ app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({extended: true}));
 
 
-const PORT = process.env.PORT || 3000;
-const DATABASE_URL = process.env.DATABASE_URL || 'mongodb://localhost:27017/';
+const PORT = process.env.PORT || 3001;
+const DATABASE_URL = process.env.DATABASE_URL || 'mongodb://localhost:27017/spotify';
 
 mongoose.connect(DATABASE_URL, {useNewUrlParser: true})
 const db = mongoose.connection;
 db.on('error', error => console.log(error))
-db.once('open', ()=> console.log("Database Connection Established"))
+db.once('open', ()=> console.log("Database Connected"))
 
 const spotifyRouter = require('./routes/spotify')
 app.use('/spotify/v1', spotifyRouter)
 
 app.get("/", (req, res) => {
-  res.json({ message : "Welcome to the Spotify API"})
+  res.json({})
 })
 
 app.listen(PORT, ()=> {

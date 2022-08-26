@@ -12,24 +12,24 @@ import Login from "./Login";
 const token = new URLSearchParams(window.location.search).get("token");
 
 function Home() {
-  let ignore = false;
-  useEffect(() => {
-    if (!ignore) {
-      axios
-        .post("http://localhost:3001/spotify/v1/auth", {
-          token,
-        })
-        .then((res) => {
-          console.log(res.data);
-        })
-        .catch(() => {
-          //window.location ='/'
-        });
-    }
-    return () => {
-      ignore = true;
-    };
-  }, [token]);
+  // let ignore = false;
+  // useEffect(() => {
+  //   if (!ignore) {
+  //     axios
+  //       .post("http://localhost:3001/spotify/v1/auth", {
+  //         token,
+  //       })
+  //       .then((res) => {
+  //         console.log(res.data);
+  //       })
+  //       .catch(() => {
+  //         //window.location ='/'
+  //       });
+  //   }
+  //   return () => {
+  //     ignore = true;
+  //   };
+  // }, [token]);
 
   return (
     <Router>
