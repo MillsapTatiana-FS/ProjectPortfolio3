@@ -2,11 +2,9 @@
   "name": "spotify-react",
   "version": "0.1.0",
   "main": "index.js",
-<<<<<<< HEAD
-=======
+  "proxy": "http://localhost:3001/spotify",
   "private": true,
-  "proxy": "http://localhost:3000",
->>>>>>> 4948e536ce036436471abee0c3c9ce28d72b2684
+
   "dependencies": {
     "@testing-library/jest-dom": "^5.16.4",
     "@testing-library/react": "^13.3.0",

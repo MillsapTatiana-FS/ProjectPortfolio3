@@ -1,7 +1,7 @@
 {
   "scripts": {
     "start" : "concurrently --kill-others \"npm run server\" \"npm run client\"",
-    "server": "cd api && npm run devStart",
+    "server": "cd server && npm run devStart",
     "client": "cd spotify-react && npm start"
   },
   "devDependencies": {
