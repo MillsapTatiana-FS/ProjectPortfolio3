@@ -5,7 +5,6 @@ const randomstring = require('randomstring');
 const SpotifyToken = require('../models/spotifytoken')
 const qs = require('qs');
 const axios = require('axios');
-const request = require('request');
 
 const client_id = process.env.CLIENT_ID;
 const client_secret = process.env.CLIENT_SECRET;
@@ -33,7 +32,7 @@ router.get('/', function(req, res, next) {
   res.redirect('http://localhost:3000/');
 })
 
-router.get('/login', (req,res) => {
+router.get('/login',function (req,res,next) {
   const state = generateRandomString(16);
   const queryParams = qs.stringify({
         response_type: 'code',
@@ -59,7 +58,7 @@ router.get('/callback', async (req,res) => {
         }),
         headers: {
           'content-type': 'application/x-www-form-urlencoded',
-          Authorization: `Basic ${Buffer.from(`${CLIENT_ID}:${CLIENT_SECRET}`).toString('base64')}`,
+          Authorization: `Basic ${Buffer.from(`${client_id}:${client_secret}`).toString('base64')}`,
           },
         })
       .then(response => {
@@ -78,7 +77,7 @@ router.get('/callback', async (req,res) => {
             expires_in,
           });
             //redirect to react
-            res.redirect('http://localhost:3001/spotify/v1?${queryParams}');
+            res.redirect('http://localhost:3001/spotify/home');
             //pass along tokens in query params        
           } else {
             res.redirect(`/?qs.stringify({ error: 'query params' })`);

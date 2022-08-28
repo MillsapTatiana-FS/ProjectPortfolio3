@@ -1,2 +1,6 @@
 GET http://localhost:3000/
+###
+Get http://localhost:3001/spotify/login
+###
+Get http://localhost:3001/spotify/callback/library
 
