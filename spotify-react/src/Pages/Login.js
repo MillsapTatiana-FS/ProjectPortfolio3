@@ -1,20 +1,27 @@
-import React, { useEffect } from "react";
-import axios from "axios";
+import React from "react";
 require("dotenv").config();
-const cors = require("cors");
+
+// const client_id = process.env.CLIENT_ID;
+// const redirectUri = "http://localhost:3000/callback";
+// const authEndpoint = "https://accounts.spotify.com/authorize?";
+// const scopes = [
+//   "user-read-private",
+//   "user-library-read",
+//   "playlist-read-private",
+//   "user-read-email",
+//   "user-read-currently-playing",
+//   "streaming",
+//   "user-modify-playback-state",
+//   "user-top-read",
+// ];
+// const response_type = "code";
+
+// const loginEndpoint = `${authEndpoint}client_id=${client_id}&redirect_uri=${redirectUri}&scope=${scopes.join(
+//   "%20"
+// )}&response_type=${response_type}&show_dialog=true`;
+// console.log(client_id);
 
 export default function Login() {
-  useEffect(() => {
-    axios
-      .get("/login")
-      .then((response) => {
-        console.log("Landing Page");
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-  }, []);
-
   return (
     <div style={styles.loginPage}>
       <img
@@ -22,13 +29,12 @@ export default function Login() {
         src="https://storage.googleapis.com/pr-newsroom-wp/1/2018/11/Spotify_Logo_RGB_White.png"
         alt="logo-spotify"
       />
-      <a href="/login">
+      <a href="http://localhost:3001/spotify/v1/login">
         <div style={styles.loginBtn}>Login With Spotify</div>
       </a>
     </div>
   );
 }
-
 const styles = {
   loginPage: {
     backgroundColor: "#000000",

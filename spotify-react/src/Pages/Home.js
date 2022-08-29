@@ -7,24 +7,9 @@ import Feed from "./Feed";
 import Library from "../Pages/Library/Library";
 import Player from "./Player";
 import Trending from "./Trending";
-//import Login from "./Login";
 
-const token = new URLSearchParams(window.location.search).get("token");
 
 function Home() {
-  let token = true;
-  useEffect(() => {
-    if (!token) {
-      axios.post("http://localhost:3001/spotify/v1/login", {token})
-        .then((res) => {
-          console.log(res.data);
-        })
-        .catch(() => {
-          window.location ='/'
-        });
-    }
-  }, [token]);
-
   return (
     <Router>
       <div style={styles.mainBody}>

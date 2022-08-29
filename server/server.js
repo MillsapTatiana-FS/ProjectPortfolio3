@@ -6,9 +6,7 @@ const mongoose = require('mongoose');
 const path = require('path');
 const cors = require('cors');
 
-app.use(cors({
-    origin: "http://localhost:3000/",
-}));
+app.use(cors({ origin: 'http://localhost:3000' }));
 app.use(express.json())
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({extended: true}));
@@ -22,7 +20,7 @@ db.on('error', error => console.log(error))
 db.once('open', ()=> console.log("Database Connected"))
 
 const spotifyRouter = require('./routes/spotify')
-app.use('/spotify', spotifyRouter)
+app.use('/spotify/v1', spotifyRouter)
 
 
 
