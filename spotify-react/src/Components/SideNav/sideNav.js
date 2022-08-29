@@ -19,10 +19,7 @@ export default function Sidebar() {
         <SideNavButton title="Feed" to="/feed" icon={<MdSpaceDashboard />} />
         <SideNavButton title="Trending" to="/trending" icon={<FaGripfire />} />
         <SideNavButton title="Player" to="/player" icon={<FaPlay />} />
-        <SideNavButton
-          title="Favorites"
-          to="/favorites"
-          icon={<MdFavorite />}
+        <SideNavButton title="Favorites"to="/favorites"icon={<MdFavorite />}
         />
         <SideNavButton title="Library" to="/" icon={<IoLibrary />} />
       </div>

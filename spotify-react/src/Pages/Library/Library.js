@@ -1,17 +1,40 @@
-import React, { useState, useEffect } from 'react';
-//import { useNavigate } from 'react-router-dom';
-import { IconContext } from 'react-icons';
-import { AiFillPlayCircle } from 'react-icons/ai';
+import React, { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
+import { IconContext } from "react-icons";
+import { AiFillPlayCircle } from "react-icons/ai";
 import "./Library.css";
+import apiClient from "../../apiKit";
+import { setClientToken } from "../../apiKit";
 
 export default function Library() {
   const [playlists, setPlaylists] = useState(null);
+  const [token, setToken] = useState("");
 
+  useEffect(() => {
+    const token = window.localStorage.getItem("token");
+    const hash = window.location.hash;
+    window.location.hash = "";
+    if (!token && hash) {
+      const _token = hash.split("&")[0].split("=")[1];
+      window.localStorage.setItem("token", _token);
+      setToken(_token);
+      setClientToken(_token);
+    } else {
+      setToken(token);
+      setClientToken(token);
+    }
+  }, []);
 
-  //const navigate = useNavigate();
+  useEffect((token) => {
+    apiClient.get("me/playlists").then(function (response) {
+      setPlaylists(response.data.items);
+    });
+  }, []);
+
+  const navigate = useNavigate();
 
   const playPlaylist = (id) => {
-    //navigate("/player", { state: { id: id } });
+    navigate("/player", { state: { id: id } });
   };
 
   return (

@@ -89,7 +89,7 @@ router.get('/login', (req,res) => {
 
 // API Callback
 
-router.get('/callback', checkToken, async (req, res) => {
+router.get('/callback', async (req, res) => {
   let token = await SpotifyToken.findOne({ where: {} });
   const code = req.body.code;
   console.log(code);
@@ -112,7 +112,8 @@ router.get('/callback', checkToken, async (req, res) => {
       if (response.status === 200) {
         axios.get('https://api.spotify.com/v1/me', {
           headers: {
-              Authorization: `${data.token_type} ${data.access_token}`
+              Authorization: `${data.token_type} ${data.access_token}`,
+              "Content-Type": "application/json"
           }
       })
       .then(response => {

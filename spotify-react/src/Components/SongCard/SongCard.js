@@ -4,7 +4,7 @@ import AlbumInfo from "./albumInfo";
 
 export default function SongCard({ album }) {
   return (
-    <div className="songCard-body flex">
+    <div style={styles.songCardBody}>
       <AlbumImage url={album?.images[0]?.url} />
       <AlbumInfo album={album} />
     </div>
@@ -12,14 +12,14 @@ export default function SongCard({ album }) {
 }
 
 const styles = {
-    .songCard-body {
-        width: 100%;
-        height: 62%;
-        background-color: #27354d;
-        border-radius: 30px;
-        border-bottom-right-radius: 0px;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
+    songCardBody: {
+        "width": "100%",
+        "height": "62%",
+        "backgroundColor": "#27354d",
+        "borderRadius": "30px",
+        "borderBottomRightRadius": "0px",
+        "flexDirection": "column",
+        "justifyContent": "center",
+        "alignItems": "center",
       }
 }

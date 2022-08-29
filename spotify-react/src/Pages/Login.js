@@ -1,25 +1,5 @@
 import React from "react";
-require("dotenv").config();
 
-// const client_id = process.env.CLIENT_ID;
-// const redirectUri = "http://localhost:3000/callback";
-// const authEndpoint = "https://accounts.spotify.com/authorize?";
-// const scopes = [
-//   "user-read-private",
-//   "user-library-read",
-//   "playlist-read-private",
-//   "user-read-email",
-//   "user-read-currently-playing",
-//   "streaming",
-//   "user-modify-playback-state",
-//   "user-top-read",
-// ];
-// const response_type = "code";
-
-// const loginEndpoint = `${authEndpoint}client_id=${client_id}&redirect_uri=${redirectUri}&scope=${scopes.join(
-//   "%20"
-// )}&response_type=${response_type}&show_dialog=true`;
-// console.log(client_id);
 
 export default function Login() {
   return (
