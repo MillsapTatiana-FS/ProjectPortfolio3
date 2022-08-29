@@ -8,28 +8,28 @@ import { setClientToken } from "../../apiKit";
 
 export default function Library() {
   const [playlists, setPlaylists] = useState(null);
-  const [token, setToken] = useState("");
+  // const [token, setToken] = useState("");
 
-  useEffect(() => {
-    const token = window.localStorage.getItem("token");
-    const hash = window.location.hash;
-    window.location.hash = "";
-    if (!token && hash) {
-      const _token = hash.split("&")[0].split("=")[1];
-      window.localStorage.setItem("token", _token);
-      setToken(_token);
-      setClientToken(_token);
-    } else {
-      setToken(token);
-      setClientToken(token);
-    }
-  }, []);
+  // useEffect(() => {
+  //   const token = window.localStorage.getItem("token");
+  //   const hash = window.location.hash;
+  //   window.location.hash = "";
+  //   if (!token && hash) {
+  //     const _token = hash.split("&")[0].split("=")[1];
+  //     window.localStorage.setItem("token", _token);
+  //     setToken(_token);
+  //     setClientToken(_token);
+  //   } else {
+  //     setToken(token);
+  //     setClientToken(token);
+  //   }
+  // }, []);
 
-  useEffect((token) => {
-    apiClient.get("me/playlists").then(function (response) {
-      setPlaylists(response.data.items);
-    });
-  }, []);
+  // useEffect((token) => {
+  //   apiClient.get("me/playlists").then(function (response) {
+  //     setPlaylists(response.data.items);
+  //   });
+  // }, []);
 
   const navigate = useNavigate();
 

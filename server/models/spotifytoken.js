@@ -13,10 +13,9 @@ const spotifyTokenSchema = new mongoose.Schema({
         type: String, 
         required: true 
     },
-    created_at: {
-        type: Date,
-        required: true,
-        default: Date.now
+    token_type: {
+        type: String,
+        required: true
     }
 });
 
