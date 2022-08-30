@@ -1,35 +1,39 @@
 import React, { useState, useEffect } from "react";
+//import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { IconContext } from "react-icons";
 import { AiFillPlayCircle } from "react-icons/ai";
 import "./Library.css";
 import apiClient from "../../apiKit";
-import { setClientToken } from "../../apiKit";
+import axios from "axios";
+//import { setClientToken } from "../../apiKit";
 
-export default function Library() {
+
+
+export default function Library({code}) {
+
   const [playlists, setPlaylists] = useState(null);
-  // const [token, setToken] = useState("");
+  //const [code, setCode] = useState("");
 
   // useEffect(() => {
-  //   const token = window.localStorage.getItem("token");
+  //   const code = new URLSearchParams(window.location.search).get("code");
   //   const hash = window.location.hash;
   //   window.location.hash = "";
-  //   if (!token && hash) {
-  //     const _token = hash.split("&")[0].split("=")[1];
-  //     window.localStorage.setItem("token", _token);
-  //     setToken(_token);
-  //     setClientToken(_token);
+  //   if (!code && hash) {
+  //     const _code = hash.split("&")[0].split("=")[1];
+  //     window.location.setItem("code", _code);
+  //     setCode(_code);
   //   } else {
-  //     setToken(token);
-  //     setClientToken(token);
+  //     setCode(code);
   //   }
   // }, []);
 
-  // useEffect((token) => {
-  //   apiClient.get("me/playlists").then(function (response) {
-  //     setPlaylists(response.data.items);
-  //   });
-  // }, []);
+  useEffect(() => {
+    axios.get("http://localhost:3001/spotify/playlists")
+    .then(function (response){  
+      setPlaylists(response.data.items);
+      });
+    }, []);
 
   const navigate = useNavigate();
 
@@ -39,6 +43,7 @@ export default function Library() {
 
   return (
     <div className="screen-container">
+      
       <div className="library-body">
         {playlists?.map((playlist) => (
           <div

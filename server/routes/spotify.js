@@ -68,7 +68,8 @@ const jwt = async (req, res, next) => {
 const auth = async (req, res) => {
   console.log(req.token)
   if (req.token) {
-    res.redirect('http://localhost:3000')
+    res.redirect('http://localhost:3000/?'+qs.stringify({ code : req.token.access_token }))
+    console.log('redirecting')
   } else {
     res.redirect('http://localhost:3000/login')
   }
@@ -127,6 +128,21 @@ const profile = async (req, res) => {
   })
 }
 
+const playlists = async (req, res) => {
+  await axios({
+    method: 'GET',
+    url: 'https://api.spotify.com/v1/me/playlists',
+    headers: { 
+      'Authorization': 'Bearer ' + req.token.access_token,
+      'Content-Type': 'application/json'
+    }
+  }).then(({data}) => {
+    res.json(data)
+  }).catch((error) => {
+    res.json(error)
+  })
+}
+
 const spotify = express.Router()
 spotify.get('/login', login)
 spotify.get('/auth', jwt, auth)
@@ -134,5 +150,7 @@ spotify.get('/token', jwt, status)
 spotify.get('/status', jwt, status)
 spotify.get('/search', jwt, search)
 spotify.get('/profile', jwt, profile)
+spotify.get('/playlists', jwt, profile, playlists)
+
 
 module.exports = spotify
