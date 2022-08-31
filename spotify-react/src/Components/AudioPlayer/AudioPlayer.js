@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react';
 import "./AudioPlayer.css";
 import Controls from "./controls";
 import ProgressCircle from "./progressCircle";
-import WaveAnimation from "./waveAnimation";
 
 export default function AudioPlayer({
     currentTrack,
