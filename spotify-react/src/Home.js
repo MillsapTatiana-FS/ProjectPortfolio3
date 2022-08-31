@@ -3,26 +3,22 @@ import React, { useState, useEffect } from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import SideNav from "./Components/SideNav/sideNav";
 import Login from "./Pages/Login";
-import Favorites from "./Pages/Favorites";
-import Feed from "./Pages/Feed";
 import Library from "./Pages/Library/Library";
 import Player from "./Pages/Player";
-import Trending from "./Pages/Trending";
+import axios from "axios";
 
 function Home() {
-  const [code, setCode] = useState("");
+  const [data, setData] = useState({});
 
   useEffect(() => {
-    const code = new URLSearchParams(window.location.search).get("code");
-    const hash = window.location.hash;
-    window.location.hash = "";
-    if (!code && hash) {
-      const _code = hash.split("&")[0].split("=")[1];
-      window.location.setItem("code", _code);
-      setCode(_code);
-    } else {
-      setCode(code);
-    }
+    axios.get('http://localhost:3001/spotify/v1/me')
+    .then(({data}) => {
+      console.log(data);
+      setData(data);
+    })
+    .catch(err => {
+      console.log(err);
+    });
   }, []);
   return (
     
@@ -31,10 +27,7 @@ function Home() {
           <SideNav />
           <Routes>
             <Route path="/" element={<Library />} />
-            <Route path="/feed" element={<Feed />} />
-            <Route path="/trending" element={<Trending />} />
             <Route path="/player" element={<Player />} />
-            <Route path="/favorites" element={<Favorites />} />
           </Routes>
         </div>
       </Router>

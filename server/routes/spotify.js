@@ -143,6 +143,21 @@ const playlists = async (req, res) => {
   })
 }
 
+const playlistImg = async (req, res) => {
+  await axios({
+    method: 'GET',
+    url: 'https://api.spotify.com/v1/playlists/' + req.params.id + '/images',
+    headers: {
+      'Authorization': 'Bearer ' + req.token.access_token,
+      'Content-Type': 'application/json'
+    }
+  }).then(({data}) => {
+    res.json(data)
+  }).catch((error) => {
+    res.json(error)
+  })
+}
+
 const spotify = express.Router()
 spotify.get('/login', login)
 spotify.get('/auth', jwt, auth)
@@ -151,6 +166,6 @@ spotify.get('/status', jwt, status)
 spotify.get('/search', jwt, search)
 spotify.get('/profile', jwt, profile)
 spotify.get('/playlists', jwt, profile, playlists)
-
+spotify.get('/playlistImg', jwt, profile, playlists, playlistImg)
 
 module.exports = spotify
