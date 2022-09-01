@@ -1,25 +1,53 @@
 import React, { useState, useEffect } from "react";
-import Home from "./Home";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import SideNav from "./Components/SideNav/sideNav";
+import Library from "./Pages/Library/Library";
+import Player from "./Pages/Player/Player";
 import Login from "./Pages/Login";
-//import axios from "axios";
+//import apiClient from "../spotify";
+import { setClientToken } from "./apiKit";
 
-const code = new URLSearchParams(window.location.search).get("code");
-
-function App() {
-  const [code, setCode] = useState(null);
+function Home() {
+  const [token, setToken] = useState("");
 
   useEffect(() => {
-    setCode = new URLSearchParams(window.location.search).get("code");
+    const token = window.localStorage.getItem("token");
     const hash = window.location.hash;
     window.location.hash = "";
-    if (!code && hash) {
-      const _code = hash.split("&")[0].split("=")[1];
-      window.location.setItem("code", _code);
-      setCode(_code);
+    if (!token && hash) {
+      const _token = hash.split("&")[0].split("=")[1];
+      window.localStorage.setItem("token", _token);
+      setToken(_token);
+      setClientToken(_token);
     } else {
-      setCode(code);
+      setToken(token);
+      setClientToken(token);
     }
   }, []);
-  return code ? <Home /> : <Login />;
+
+  return !token ? (
+    <Login />
+  ) : (
+    <Router>
+      <div style={styles.mainBody}>
+        <SideNav />
+        <Routes>
+          <Route path="/" element={<Library />} />
+          <Route path="/player" element={<Player />} />
+        </Routes>
+      </div>
+    </Router>
+  );
 }
-export default App;
+
+export default Home;
+
+const styles = {
+  mainBody: {
+    height: "100vh",
+    width: "100vw",
+    backgroundColor: "#f7e2fb",
+    borderRadius: "30px",
+    display: "flex",
+  },
+};
