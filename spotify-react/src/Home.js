@@ -9,29 +9,46 @@ import axios from "axios";
 
 function Home() {
   const [data, setData] = useState({});
+  const [token, setToken] = useState("");
 
   useEffect(() => {
-    axios.get('http://localhost:3001/spotify/v1/me')
-    .then(({data}) => {
-      console.log(data);
-      setData(data);
-    })
-    .catch(err => {
-      console.log(err);
-    });
+    const token = window.localStorage.getItem("token");
+    const hash = window.location.hash;
+    window.location.hash = "";
+    if (!token && hash) {
+      const _token = hash.split("&")[0].split("=")[1];
+      window.localStorage.setItem("token", _token);
+      setToken(_token);
+      setClientToken(_token);
+    } else {
+      setToken(token);
+      setClientToken(token);
+    }
   }, []);
-  return (
-    
-      <Router>
-        <div style={styles.mainBody}>
-          <SideNav />
-          <Routes>
-            <Route path="/" element={<Library />} />
-            <Route path="/player" element={<Player />} />
-          </Routes>
-        </div>
-      </Router>
-    
+
+  useEffect(() => {
+    axios
+      .get("http://localhost:3001/spotify/v1/me")
+      .then(({ data }) => {
+        console.log(data);
+        setData(data);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }, []);
+  return !token ? (
+    <Login />
+  ) : (
+    <Router>
+      <div style={styles.mainBody}>
+        <SideNav />
+        <Routes>
+          <Route path="/" element={<Library />} />
+          <Route path="/player" element={<Player />} />
+        </Routes>
+      </div>
+    </Router>
   );
 }
 

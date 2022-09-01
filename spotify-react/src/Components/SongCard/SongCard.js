@@ -1,6 +1,6 @@
 import React from "react";
-import AlbumImage from "./albumImage";
-import AlbumInfo from "./albumInfo";
+import AlbumImage from "./AlbumImage";
+import AlbumInfo from "./AlbumInfo";
 
 export default function SongCard({ album }) {
   return (
@@ -12,14 +12,15 @@ export default function SongCard({ album }) {
 }
 
 const styles = {
-    songCardBody: {
-        "width": "100%",
-        "height": "62%",
-        "backgroundColor": "#27354d",
-        "borderRadius": "30px",
-        "borderBottomRightRadius": "0px",
-        "flexDirection": "column",
-        "justifyContent": "center",
-        "alignItems": "center",
-      }
-}
+  songCardBody: {
+    width: "95%",
+    height: "55%",
+    marginLeft: "2%",
+    marginRight: "10%",
+    backgroundColor: " #ad2ba0",
+    borderRadius: "30px",
+    flexDirection: "column",
+    justifyContent: "center",
+    alignItems: "center",
+  },
+};

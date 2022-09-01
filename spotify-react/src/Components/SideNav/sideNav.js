@@ -3,8 +3,8 @@ import { FaPlay } from "react-icons/fa";
 import { IoLibrary } from "react-icons/io5";
 //import { MdSpaceDashboard } from 'react-icons/md';
 import { FaSignOutAlt } from "react-icons/fa";
-import SideNavButton from "./SideNavButton";
-import "./SideNav.css";
+import SideNavButton from "./sideNavButton";
+import "./sideNav.css";
 import apiClient from "../../spotify";
 
 export default function SideNav() {
