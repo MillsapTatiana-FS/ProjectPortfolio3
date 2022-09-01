@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
-import apiClient from "../../spotify";
+import apiClient from "../../apiKit";
 import SongCard from "../../Components/SongCard/SongCard";
 import Queue from "../../Components/Queue/Queue";
 import AudioPlayer from "../../Components/AudioPlayer/AudioPlayer";

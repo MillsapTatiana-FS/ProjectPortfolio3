@@ -1,5 +1,5 @@
 import React from "react";
-import { loginEndpoint } from "../spotify";
+import { loginEndpoint } from "../apiKit";
 
 export default function Login() {
   return (

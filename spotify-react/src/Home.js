@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from "react";
-//import axios from "axios";
+import axios from "axios";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import SideNav from "./Components/SideNav/sideNav";
 import Login from "./Pages/Login";
 import Library from "./Pages/Library/Library";
 import Player from "./Pages/Player/Player";
-import axios from "axios";
+import { setClientToken } from "./apiKit";
 
 function Home() {
   const [data, setData] = useState({});

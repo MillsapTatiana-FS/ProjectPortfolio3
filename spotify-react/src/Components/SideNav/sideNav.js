@@ -5,7 +5,7 @@ import { IoLibrary } from "react-icons/io5";
 import { FaSignOutAlt } from "react-icons/fa";
 import SideNavButton from "./sideNavButton";
 import "./sideNav.css";
-import apiClient from "../../spotify";
+import apiClient from "../../apiKit";
 
 export default function SideNav() {
   const [image, setImage] = useState(
