@@ -4,7 +4,7 @@ import SideNav from "./Components/SideNav/sideNav";
 import Library from "./Pages/Library/Library";
 import Player from "./Pages/Player/Player";
 import Login from "./Pages/Login";
-//import apiClient from "../spotify";
+import apiClient from "../spotify";
 import { setClientToken } from "./apiKit";
 
 function Home() {
@@ -25,10 +25,9 @@ function Home() {
     }
   }, []);
 
-  return !token ? (
-    <Login />
-  ) : (
-    <Router>
+  return 
+  !token ? <Login />
+   : <Router>
       <div style={styles.mainBody}>
         <SideNav />
         <Routes>

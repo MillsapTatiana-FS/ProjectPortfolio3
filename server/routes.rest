@@ -1,9 +1,0 @@
-GET http://localhost:3001/spotify/callback/library
-###
-Get http://localhost:3000/authorize
-###
-Get http://localhost:3001/spotify/authorize
-###
-GET http://localhost:3000/callback
-
-
