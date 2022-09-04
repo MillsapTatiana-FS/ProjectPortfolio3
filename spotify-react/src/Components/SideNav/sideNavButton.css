@@ -17,13 +17,13 @@ a {
 }
 
 .btn-body.active{
-    background-color: rgb(220, 146, 244);
+    background-color: #dc92f4;
     color: #fff;
     transform: scale(1.05);
 }
 
 .btn-body:hover{
-    color: rgb(213, 160, 218);
+    color: #d5a0da;
 }
 
 .btn-title{

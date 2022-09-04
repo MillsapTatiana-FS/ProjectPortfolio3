@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import apiClient from "../../apiKit";
+import APIKit from "../../apiKit";
 import { IconContext } from "react-icons";
 import { AiFillPlayCircle } from "react-icons/ai";
 import "./Library.css";
@@ -9,7 +9,7 @@ export default function Library() {
   const [playlists, setPlaylists] = useState(null);
 
   useEffect(() => {
-    apiClient.get("me/playlists").then(function (response) {
+    APIKit.get("me/playlists").then(function (response) {
       setPlaylists(response.data.items);
       console.log(response.data.items);
     });

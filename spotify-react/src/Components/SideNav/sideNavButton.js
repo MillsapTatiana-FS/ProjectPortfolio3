@@ -1,7 +1,7 @@
 import React from "react";
 import { IconContext } from "react-icons";
 import { Link, useLocation } from "react-router-dom";
-import "./sideNavButton.css";
+import "./SideNavButton.css";
 
 export default function SideNavButton(props) {
   const location = useLocation();

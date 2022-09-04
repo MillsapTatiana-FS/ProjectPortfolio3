@@ -1,10 +1,9 @@
 import React, { useState, useEffect } from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import SideNav from "./Components/SideNav/sideNav";
+import SideNav from "./Components/SideNav/SideNav";
 import Library from "./Pages/Library/Library";
-import Player from "./Pages/Player/Player";
+import Player from "./Pages/Player/player";
 import Login from "./Pages/Login";
-import apiClient from "../spotify";
 import { setClientToken } from "./apiKit";
 
 function Home() {
@@ -25,9 +24,10 @@ function Home() {
     }
   }, []);
 
-  return 
-  !token ? <Login />
-   : <Router>
+  return !token ? (
+    <Login />
+  ) : (
+    <Router>
       <div style={styles.mainBody}>
         <SideNav />
         <Routes>
